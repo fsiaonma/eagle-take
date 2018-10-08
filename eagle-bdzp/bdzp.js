@@ -11,7 +11,6 @@ function updateCompanyMap() {
 function run(startIndex, type) {
 
     var xhr = new XMLHttpRequest();
-//     xhr.open('GET', 'http://zhaopin.baidu.com/api/quanzhiasync?query=%E5%A4%96%E8%B4%B8&sort_type=1&city=%E5%B9%BF%E5%B7%9E&district=%25E7%2595%25AA%25E7%25A6%25BA%25E5%258C%25BA&detailmode=close&rn=20&pn=' + startIndex, true);
     xhr.open('GET', 'http://zhaopin.baidu.com/api/qzasync?query=%E5%A4%96%E8%B4%B8&city=%25E5%25B9%25BF%25E5%25B7%259E&is_adq=1&pcmod=1&pn=' + startIndex + '&rn=20', true);
     xhr.send();
     xhr.onreadystatechange = function() {
