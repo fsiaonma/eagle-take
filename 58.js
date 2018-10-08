@@ -4,7 +4,7 @@ snd.src = "http://gddx.sc.chinaz.com/Files/DownLoad/sound1/201709/9251.wav";
 var companyMap = {};
 
 function getTotalPage() {
-    const is = document.getElementsByTagName("i");
+    var is = document.getElementsByTagName("i");
     for (var i = 0; i < is.length; ++i) {
         if (is[i].className.indexOf("total_page") > -1) {
             return is[i].innerText;
@@ -24,6 +24,13 @@ function getDetail(divs) {
     return detail;
 }
 
+var companyMap = {};
+
+function updateCompanyMap() {
+    var dbCompanyMap = localStorage.getItem("companyMap");
+    companyMap = dbCompanyMap ? JSON.parse(dbCompanyMap) : {};
+}
+
 function findTitleAndLink(ulEle, type, page) {
     var lis = ulEle.children;
     for (var i = 0; i < lis.length; ++i) {
@@ -33,19 +40,14 @@ function findTitleAndLink(ulEle, type, page) {
                 var jobDiv = divs[j].getElementsByTagName('a')[0];
                 var a = divs[j].getElementsByTagName('a')[0];
                 if (type === 'init') {
-                    const dbCompanyMap = localStorage.getItem("companyMap");
-                    var companyMap = JSON.parse(dbCompanyMap ? dbCompanyMap : JSON.stringify({}));
                     companyMap[a.title] = {
                         href: a.href,
                         detail: getDetail(divs)
                     }
                     console.log('【初始化】【公司名】：' + a.title + ' | 【链接】：' + a.href);
                     localStorage.setItem("companyMap", JSON.stringify(companyMap));
-                    companyMap = dbCompanyMap = null;
+                    updateCompanyMap();
                 } else {
-                    const dbCompanyMap = localStorage.getItem("companyMap");
-                    if (!dbCompanyMap) { return; }
-                    var companyMap = JSON.parse(dbCompanyMap);
                     if (!companyMap[a.title]) {
                         companyMap[a.title] = {
                             href: a.href,
@@ -55,7 +57,7 @@ function findTitleAndLink(ulEle, type, page) {
                         console.log('【新增】【公司名】：' + a.title + ' | 【链接】：' + a.href + ' | 页数：' + page);
                     }
                     localStorage.setItem("companyMap", JSON.stringify(companyMap));
-                    companyMap = dbCompanyMap = null;
+                    updateCompanyMap();
                 }
                 
             }
@@ -96,4 +98,5 @@ function getAllCompany() {
     }
 }
 
+updateCompanyMap();
 getAllCompany();
