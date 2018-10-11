@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "eagle-take-bdzp",
-  "description": "eagle-take-bdzp",
+  "name": "eagle-take-bdzp-panyu",
+  "description": "eagle-take-bdzp-panyu",
   "version": "3.0",
   "permissions": [ "activeTab" ],
   "browser_action": {
-    "default_title": "eagle bdzp",
+    "default_title": "eagle bdzp panyu",
     "default_icon": "eagle-1.png"
   },
   "background": {

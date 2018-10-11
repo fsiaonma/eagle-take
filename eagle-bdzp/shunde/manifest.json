@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "eagle-take-bdzp-shunde",
+  "description": "eagle-take-bdzp-shunde",
+  "version": "3.0",
+  "permissions": [ "activeTab" ],
+  "browser_action": {
+    "default_title": "eagle bdzp shunde",
+    "default_icon": "bird.png"
+  },
+  "background": {
+    "scripts": [ "background-bdzp.js" ],
+    "persistent": false
+  },
+  "icons":{
+    "128": "bird.png",
+    "16": "bird.png",
+    "48": "bird.png"
+  }
+}

@@ -1,17 +1,20 @@
+var localStorageKey = "bdzpCompanyMapShunde";
+var dataApi = "http://zhaopin.baidu.com/api/qzasync?query=%E5%A4%96%E8%B4%B8&city=%25E4%25BD%259B%25E5%25B1%25B1&is_adq=1&pcmod=1&district=%25E9%25A1%25BA%25E5%25BE%25B7%25E5%258C%25BA&rn=20&pn=";
+
 var snd = new Audio();
 snd.src = "http://gddx.sc.chinaz.com/Files/DownLoad/sound1/201709/9251.wav";
 
 var bdzpCompanyMap = {};
 
 function updateCompanyMap() {
-    var dbCompanyMap = localStorage.getItem("bdzpCompanyMap");
+    var dbCompanyMap = localStorage.getItem(localStorageKey);
     bdzpCompanyMap = dbCompanyMap ? JSON.parse(dbCompanyMap) : {};
 }
 
 function run(startIndex, type) {
-
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://zhaopin.baidu.com/api/qzasync?query=%E5%A4%96%E8%B4%B8&city=%25E5%25B9%25BF%25E5%25B7%259E&is_adq=1&pcmod=1&pn=' + startIndex + '&rn=20', true);
+
+    xhr.open('GET', dataApi + startIndex, true);
     xhr.send();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -22,17 +25,17 @@ function run(startIndex, type) {
                     for (var i = 0; i < mainData.disp_data.length; ++i) {
                         var item = mainData.disp_data[i];
                         if (type === 'init') {
-                            bdzpCompanyMap[item.officialname] = item;
-                            console.log('【初始化】【公司名】：' + item.officialname + ' | 【链接】：' + item.url);
-                            localStorage.setItem("bdzpCompanyMap", JSON.stringify(bdzpCompanyMap));
+                            bdzpCompanyMap[item.officialname] = 1;
+                            console.log('【初始化】【公司名】：' + item.officialname + ' | 【链接】：' + item.url + ' | startIndex: ' + startIndex);
+                            localStorage.setItem(localStorageKey, JSON.stringify(bdzpCompanyMap));
                             updateCompanyMap();
                         } else {
                             if (!bdzpCompanyMap[item.officialname]) {
-                                bdzpCompanyMap[item.officialname] = item;
+                                bdzpCompanyMap[item.officialname] = 1;
                                 snd.play();
                                 console.log('【新增】【公司名】：' + item.officialname + ' | 【链接】：' + item.url + ' | startIndex: ' + startIndex);
                             }
-                            localStorage.setItem("bdzpCompanyMap", JSON.stringify(bdzpCompanyMap));
+                            localStorage.setItem(localStorageKey, JSON.stringify(bdzpCompanyMap));
                             updateCompanyMap();
                         }
                     }
@@ -56,7 +59,7 @@ function run(startIndex, type) {
 }
 
 function getAllCompany() {
-    if (!localStorage.getItem("bdzpCompanyMap")) {
+    if (!localStorage.getItem(localStorageKey)) {
         run(0, 'init');
     } else { 
         console.log('------------------ 开始爬取：' + new Date() + '------------------');
