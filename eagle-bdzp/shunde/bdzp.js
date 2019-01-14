@@ -1,5 +1,5 @@
 var localStorageKey = "bdzpCompanyMapShunde";
-var dataApi = "http://zhaopin.baidu.com/api/qzasync?query=%E5%A4%96%E8%B4%B8&city=%25E4%25BD%259B%25E5%25B1%25B1&is_adq=1&pcmod=1&district=%25E9%25A1%25BA%25E5%25BE%25B7%25E5%258C%25BA&rn=20&pn=";
+var dataApi = "http://zhaopin.baidu.com/api/qzasync?query=%E5%A4%96%E8%B4%B8&city=%25E4%25BD%259B%25E5%25B1%25B1&is_adq=1&pcmod=1&district=%25E9%25A1%25BA%25E5%25BE%25B7%25E5%258C%25BA&rn=10&pn=";
 
 var snd = new Audio();
 snd.src = "http://gddx.sc.chinaz.com/Files/DownLoad/sound1/201709/9251.wav";
@@ -40,7 +40,7 @@ function run(startIndex, type) {
                         }
                     }
                     setTimeout(function() {
-                        run(startIndex + 20, type);
+                        run(startIndex + 10, type);
                     }, 1000);
                 } else {
                     console.log('------------------ 完成爬取：' + new Date() + '------------------');
