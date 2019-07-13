@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "eagle-take-zhilian",
+  "description": "eagle-take-zhilian",
+  "version": "3.0",
+  "permissions": [ "activeTab" ],
+  "browser_action": {
+    "default_title": "eagle zhilian",
+    "default_icon": "eagle.png"
+  },
+  "background": {
+    "scripts": [ "background-zhilian.js" ],
+    "persistent": false
+  },
+  "icons":{
+    "128": "eagle.png",
+    "16": "eagle.png",
+    "48": "eagle.png"
+  }
+}
